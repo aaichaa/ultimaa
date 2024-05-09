@@ -1,0 +1,35 @@
+spring:
+  profiles:
+    active:
+      - ${PROFILE_DATABASE:mysql}
+      - ${PROFILE:dev}
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  servlet:
+    multipart:
+      enabled: true
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+        hibernate:
+          format-sql: true
+# Configuration de la version
+ili:
+  server:
+    version: ${VERSION_SERVER:1.2.3}
+
+springdoc:
+  swagger-ui:
+    tags-sorter: alpha
+    operations-sorter: alpha
+
+server:
+  port: ${SERVER_PORT:2024}
+
+
