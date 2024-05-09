@@ -1,0 +1,8 @@
+spring:
+  jpa:
+    open-in-view: false #https://www.yawintutor.com/warn-3840-spring-jpa-open-in-view-is-enabled-default/
+
+  servlet:
+    multipart:
+      max-file-size: -1
+      max-request-size: -1
