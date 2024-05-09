@@ -1,4 +1,0 @@
-spring:
-  jpa:
-    database: mysql
-    database-platform: org.hibernate.dialect.MySQLDialect

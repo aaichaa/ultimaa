@@ -1,5 +1,0 @@
-spring:
-  datasource:
-    driver-class-name: ${DB_DRIVER:org.sqlite.JDBC}
-  jpa:
-    database-platform: org.hibernate.community.dialect.SQLiteDialect
