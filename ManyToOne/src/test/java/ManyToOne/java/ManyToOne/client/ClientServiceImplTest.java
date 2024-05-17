@@ -1,4 +1,4 @@
-package ManyToOne.java.ManyToOne;
+package ManyToOne.java.ManyToOne.client;
 
 import ManyToOne.java.ManyToOne.model.Client;
 import ManyToOne.java.ManyToOne.repository.ClientRepository;
