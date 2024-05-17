@@ -36,7 +36,7 @@ public class CommandeServiceImpl implements CommandeService {
             //Client client = clientOptional.get();
             command.setClient(optionalClient.get());
 
-            return ResponseEntity.ok(commandeRepo.save(command));
+            return ResponseEntity.status(HttpStatus.CREATED).body(commandeRepo.save(command));
         }
         else {
             throw new NotFoundException("Client id introuvable");
