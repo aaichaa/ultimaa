@@ -64,20 +64,13 @@ public class CommandeServiceImpl implements CommandeService {
         return optionalCommande;
     }
 
-
-
     @Override
-    public ResponseEntity<String> deleteCommande(int commandeId) {
-        Optional<Commande> optionalCommande = getId(commandeId);
-        if (optionalCommande.isPresent()){
-             commandeRepo.deleteById(commandeId);
-            return ResponseEntity.ok("Commande supprimée avec succès");
-
-        }else {
-            throw new NotFoundException("cette commande n'existe pas");
-        }
-
+    public ResponseEntity<List<Commande>> getAllCommande() {
+        List<Commande> clients = commandeRepo.findAll();
+        return  ResponseEntity.ok(clients);
     }
+
+
 
     @Override
     public ResponseEntity<Commande> putCommande(int commandeId, Commande newcommande) {
@@ -94,11 +87,20 @@ public class CommandeServiceImpl implements CommandeService {
 
     }
 
-         @Override
-    public ResponseEntity<List<Commande>> getAllCommande() {
-         List<Commande> clients = commandeRepo.findAll();
-        return  ResponseEntity.ok(clients);
-     }
+    @Override
+    public ResponseEntity<String> deleteCommande(int commandeId) {
+        Optional<Commande> optionalCommande = getId(commandeId);
+        if (optionalCommande.isPresent()){
+            commandeRepo.deleteById(commandeId);
+            return ResponseEntity.ok("Commande supprimée avec succès");
+
+        }else {
+            throw new NotFoundException("cette commande n'existe pas");
+        }
+
+    }
+
+
 
 
 

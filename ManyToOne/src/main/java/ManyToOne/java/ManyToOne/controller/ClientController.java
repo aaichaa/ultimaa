@@ -38,7 +38,7 @@ public class ClientController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Client>  putClient(@RequestBody Client client, @PathVariable int id) {
-        return clientService.putClient(id, client);
+    public ResponseEntity<Client>  putClient(@RequestBody Client newClient, @PathVariable int id) {
+        return clientService.putClient(id, newClient);
     }
 }

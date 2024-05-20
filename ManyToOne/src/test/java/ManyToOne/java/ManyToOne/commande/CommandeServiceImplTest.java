@@ -7,6 +7,7 @@ import ManyToOne.java.ManyToOne.repository.CommandeRepository;
 import ManyToOne.java.ManyToOne.service.ClientServiceImpl;
 import ManyToOne.java.ManyToOne.service.CommandeServiceImpl;
 import lombok.extern.log4j.Log4j2;
+import org.apache.tomcat.util.net.jsse.PEMFile;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -57,6 +58,8 @@ public class CommandeServiceImplTest {
 
       private Commande commande7;
 
+      private Commande updatedCommande;
+
 
 
 
@@ -87,6 +90,11 @@ public class CommandeServiceImplTest {
             commande.setDatecommande("12-02-2000");
             commande.setNomcommande("Bidon");
             commande.setClient(client5);
+
+            updatedCommande = new Commande();
+            updatedCommande.setDatecommande("12-02-10000");
+            updatedCommande.setNomcommande("BULLE");
+            updatedCommande.setClient(client5);
 
 
             commande7 = new Commande();
@@ -157,6 +165,36 @@ public class CommandeServiceImplTest {
 
     }
 
+    @DisplayName("Junit test for update Commande")
+    @Test
+    public void testUpdateCommande_Success() {
+        when(commandeRepository.findById(commande.getN_commande())).thenReturn(Optional.of(commande));
+        when(commandeRepository.save(commande)).thenReturn(commande);
+
+        ResponseEntity<Commande> putUtilisateur = commandeServiceImplementation.putCommande(commande.getN_commande(),updatedCommande);
+        log.info(putUtilisateur.getBody());
+
+
+
+    }
+
+
+    @DisplayName("Junit test for delete Commande")
+    @Test
+    public void testDeleteCommande_Success() {
+        when(commandeRepository.findById(commande7.getN_commande())).thenReturn(Optional.of(commande7));
+
+        ResponseEntity<String> deleteUtilisateur = commandeServiceImplementation.deleteCommande(commande7.getN_commande());
+
+        log.info(deleteUtilisateur.getBody());
+        assertThat(deleteUtilisateur).isNotNull();
+        assertThat(deleteUtilisateur.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertEquals("Commande supprimée avec succès", deleteUtilisateur.getBody());
+
+        verify(commandeRepository, times(1)).deleteById(commande7.getN_commande());
+
+
+    }
 
 
 }

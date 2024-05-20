@@ -60,49 +60,15 @@ public class ClientServiceImpl implements ClientService{
     }
 
 
-/*
-    private Client getId(int id){
-        Optional<Client> updateClient = clientRepos.findById(id);
-        return updateClient.get();
-    }
-    @Override
-    public Client putClient(int id, Client newclient) {
-        Client updateClient = getId(id);
-        updateClient.setNom(newclient.getNom());
-        updateClient.setPrenom(newclient.getPrenom());
-        //  updateClient.setTel(newclient.getTel());
-        updateClient.setQuartier(newclient.getQuartier());
-
-        return clientRepos.save(updateClient);
-    }
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     @Override
-    public ResponseEntity<Client> putClient(int clientId, Client client) {
+    public ResponseEntity<Client> putClient(int clientId, Client newClient) {
         Optional<Client> optionalClient = clientRepos.findById(clientId);
         if (optionalClient.isPresent()){
             Client clients = optionalClient.get();
-            clients.setNom(client.getNom());
-            clients.setPrenom(client.getPrenom());
-            clients.setQuartier(client.getQuartier());
+            clients.setNom(newClient.getNom());
+            clients.setPrenom(newClient.getPrenom());
+            clients.setQuartier(newClient.getQuartier());
 
             return ResponseEntity.ok(clientRepos.save(clients));
         }else{

@@ -12,7 +12,7 @@ public interface ClientService {
     public ResponseEntity<List<Client>> getAllClient();
     public ResponseEntity<Client> getClient(int clientId);
    public ResponseEntity<String> deleteClient(int clientId);
-   public ResponseEntity<Client> putClient (int clientId, Client client);
+   public ResponseEntity<Client> putClient (int clientId, Client newClient);
 
 
 

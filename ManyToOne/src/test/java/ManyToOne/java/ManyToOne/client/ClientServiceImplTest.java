@@ -1,6 +1,7 @@
 package ManyToOne.java.ManyToOne.client;
 
 import ManyToOne.java.ManyToOne.model.Client;
+import ManyToOne.java.ManyToOne.model.Commande;
 import ManyToOne.java.ManyToOne.repository.ClientRepository;
 import ManyToOne.java.ManyToOne.service.ClientServiceImpl;
 import lombok.extern.log4j.Log4j2;
@@ -41,6 +42,9 @@ public class ClientServiceImplTest {
     private Client client5;
 
 
+    private Client newClient;
+
+
     @BeforeEach
     void setup() {
         client = new Client();
@@ -48,6 +52,12 @@ public class ClientServiceImplTest {
         client.setNom("Diallo");
         client.setPrenom("Aissatou");
         client.setQuartier("Dijon");
+
+
+        newClient = new Client();
+        newClient.setNom("dialoooooo");
+        newClient.setPrenom("Aissatouuuuuuuuuuuu");
+        newClient.setQuartier("Dijonnnnnnnnnn");
 
 
         client5 = new Client();
@@ -110,10 +120,37 @@ public class ClientServiceImplTest {
     }
 
 
+    @DisplayName("Junit test for update Client")
+    @Test
+    public void testUpdateClient_Success() {
+        when(clientRepository.findById(client.getId())).thenReturn(Optional.of(client));
+        when(clientRepository.save(client)).thenReturn(client);
+
+        ResponseEntity<Client> putClient = clientServiceImplementation.putClient(client.getId(), newClient);
+
+        log.info(putClient.getBody());
 
 
 
+    }
 
+
+    @DisplayName("Junit test for delete Client")
+    @Test
+    public void testDeleteClient_Success() {
+        when(clientRepository.findById(client.getId())).thenReturn(Optional.of(client));
+
+        ResponseEntity<String>  deleteClient = clientServiceImplementation.deleteClient(client.getId());
+
+        log.info(deleteClient.getBody());
+        assertThat(deleteClient).isNotNull();
+        assertThat(deleteClient.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertEquals("Client supprimé avec succès", deleteClient.getBody());
+
+        verify(clientRepository, times(1)).deleteById(client.getId());
+
+
+    }
 
 
 
