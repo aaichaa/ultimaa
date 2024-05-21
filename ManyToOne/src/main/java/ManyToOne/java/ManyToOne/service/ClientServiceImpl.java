@@ -44,38 +44,37 @@ public class ClientServiceImpl implements ClientService{
         }
     }
 
-   @Override
-    public ResponseEntity<String>  deleteClient(int clientId) {
-       Optional<Client> optionalClient = getId(clientId);
-       if (optionalClient.isPresent()){
-           clientRepos.deleteById(clientId);
-           return ResponseEntity.ok("Client supprimé avec succès");
-       }else{
-           throw new NotFoundException("ce client n'existe pas :)");
-       }
-
-
-
-
-    }
 
 
 
     @Override
     public ResponseEntity<Client> putClient(int clientId, Client newClient) {
         Optional<Client> optionalClient = clientRepos.findById(clientId);
-        if (optionalClient.isPresent()){
+        if (optionalClient.isPresent()) {
             Client clients = optionalClient.get();
             clients.setNom(newClient.getNom());
             clients.setPrenom(newClient.getPrenom());
             clients.setQuartier(newClient.getQuartier());
 
             return ResponseEntity.ok(clientRepos.save(clients));
-        }else{
+        } else {
             throw new NotFoundException("Ce id est introuvable desolé");
         }
+    }
 
 
+
+        @Override
+        public ResponseEntity<String>  deleteClient(int clientId) {
+            Optional<Client> optionalClient = getId(clientId);
+            if (optionalClient.isPresent()){
+                clientRepos.deleteById(clientId);
+                return ResponseEntity.ok("Client supprimé avec succès");
+            }else{
+                throw new NotFoundException("ce client n'existe pas :)");
+            }
+
+        }
 
 
     }
@@ -103,4 +102,4 @@ public class ClientServiceImpl implements ClientService{
 
 
 
-}
+
