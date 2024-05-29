@@ -34,18 +34,18 @@ public class CommandeController {
 
         return commandeService.findByIdCommande(n_commande);
     }*/
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Commande> putCommande(@PathVariable int id, @RequestBody Commande newcommande) {
+
+        return commandeService.putCommande(id, newcommande);
+    }
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteCommande (@PathVariable int id){
         return commandeService.deleteCommande(id);
     }
 
-    @PutMapping("/{id}")
 
-
-        public ResponseEntity<Commande> putCommande(@PathVariable int id, @RequestBody Commande newcommande) {
-
-        return commandeService.putCommande(id, newcommande);
-    }
 
 
 }

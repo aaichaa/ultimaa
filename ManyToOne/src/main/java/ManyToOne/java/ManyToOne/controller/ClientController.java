@@ -31,14 +31,17 @@ public class ClientController {
     }
 
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Client>  putClient(@RequestBody Client newClient, @PathVariable int id) {
+        return clientService.putClient(id, newClient);
+    }
+
+
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteClient(@PathVariable int id) {
 
        return clientService.deleteClient(id);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Client>  putClient(@RequestBody Client newClient, @PathVariable int id) {
-        return clientService.putClient(id, newClient);
-    }
+
 }
