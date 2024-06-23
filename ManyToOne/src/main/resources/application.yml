@@ -1,4 +1,10 @@
 spring:
+  application:
+    name: Demo API
+  boot:
+    admin:
+      client:
+        url: http://localhost:9090
   profiles:
     active:
       - ${PROFILE_DATABASE:mysql}
@@ -31,5 +37,23 @@ springdoc:
 
 server:
   port: ${SERVER_PORT:2024}
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  file:
+    name: demo_api.log
+  logback:
+    rollingpolicy:
+      max-history: 5
+      max-file-size: 10MB
 
 
